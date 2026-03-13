@@ -10,7 +10,6 @@ embedding_model = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
 
-
 # Load FAISS vector database
 vector_db = FAISS.load_local(
     "vector_store/faiss_index",
@@ -18,11 +17,10 @@ vector_db = FAISS.load_local(
     allow_dangerous_deserialization=True
 )
 
-
-# Load LLM
+# Small LLM
 generator = pipeline(
     "text-generation",
-    model="mistralai/Mistral-7B-Instruct-v0.1"
+    model="google/flan-t5-base"
 )
 
 
@@ -33,15 +31,13 @@ def ask_pitchlaw(question):
     context = "\n".join([doc.page_content for doc in docs])
 
     prompt = f"""
-You are a football referee assistant.
+Answer using FIFA rules.
 
 Context:
 {context}
 
 Question:
 {question}
-
-Answer based on FIFA rules.
 """
 
     result = generator(prompt, max_new_tokens=200)
@@ -49,13 +45,13 @@ Answer based on FIFA rules.
     return result[0]["generated_text"]
 
 
-# Gradio UI
+# UI
 interface = gr.Interface(
     fn=ask_pitchlaw,
-    inputs=gr.Textbox(label="Ask a FIFA rule question"),
-    outputs=gr.Textbox(label="Answer"),
+    inputs="text",
+    outputs="text",
     title="⚽ PitchLaw AI",
-    description="AI assistant for FIFA rules and regulations"
+    description="AI assistant for FIFA rules"
 )
 
 interface.launch()
