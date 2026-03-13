@@ -1,0 +1,16 @@
+streamlit
+gradio
+langchain
+langchain-community
+faiss-cpu
+sentence-transformers
+transformers
+torch
+pypdf
+tqdm
+numpy
+pandas
+matplotlib
+jupyter
+notebook
+scikit-learn

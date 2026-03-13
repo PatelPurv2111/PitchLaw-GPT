@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Data files
+data/*.pdf
+
+# Vector database
+vector_store/
+
+# OS files
+.DS_Store
+
+# Logs
+*.log
+
+# Streamlit cache
+.streamlit
+
+.venv/
+# VS Code
+.vscode/
+# PyCharm
+.idea/
+.ipynb_checkpoints/
